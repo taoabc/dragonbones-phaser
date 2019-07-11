@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "strict": true,
+    "watch": false,
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "importHelpers": false,
+    "sourceMap": false,
+    "stripInternal": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "outDir": "dist",
+    "lib": ["es2015", "dom"]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
