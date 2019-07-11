@@ -1,0 +1,28 @@
+{
+  "name": "dragonbones-phaser",
+  "version": "0.0.1",
+  "description": "DragonBones for Phaser",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taoabc/dragonbones-phaser.git"
+  },
+  "keywords": [
+    "dragonbones",
+    "phaser",
+    "phaser3"
+  ],
+  "author": "Hitao",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/taoabc/dragonbones-phaser/issues"
+  },
+  "homepage": "https://github.com/taoabc/dragonbones-phaser#readme",
+  "dependencies": {
+    "libdragonbones": "^0.1.3",
+    "phaser": "^3.18.1"
+  }
+}
