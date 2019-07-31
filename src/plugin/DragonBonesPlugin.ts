@@ -38,10 +38,14 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
             }
         }
 
-        // Add dragonBones only
-        pluginManager.registerGameObject('dragonBones', CreateDragonBonesRegisterHandler);
-        // Add armature, this will add dragonBones when not exist
+        /**
+         * Add armature, this will add dragonBones when not exist
+         * add.armature('armatureName', 'dragonbonesName')
+         */
         pluginManager.registerGameObject('armature', CreateArmatureRegisterHandler);
+        /**
+         * load.dragonbone('xx', 'texImage', 'texJson', 'skeJson')
+         */
         pluginManager.registerFileType('dragonbone', DragonBoneFileRegisterHandler, scene);
     }
 
@@ -52,10 +56,6 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
         this._dbInst.clock.add(display.armature);
 
         return display;
-    }
-
-    public createDragonBones(dragonBonesName: string, textureScale = 1.0): dragonBones.DragonBonesData {
-        return this.factory.buildDragonBonesData(dragonBonesName, textureScale);
     }
 
     /*
@@ -101,10 +101,6 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
         this._dbInst && this._dbInst.advanceTime(delta * 0.001);
     }
 }
-
-const CreateDragonBonesRegisterHandler = function (dragonBonesName: string, textureScale = 1.0): dragonBones.DragonBonesData {
-    return this.scene.dragonbone.createDragonBones(dragonBonesName, textureScale);
-};
 
 const CreateArmatureRegisterHandler = function (armature: string, dragonBones?: string, skinName?: string, atlasTextureName?: string): ArmatureDisplay {
     return this.scene.dragonbone.createArmature(armature, dragonBones, skinName, atlasTextureName);

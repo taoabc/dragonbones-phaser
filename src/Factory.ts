@@ -25,24 +25,6 @@ export class Factory extends dragonBones.BaseFactory {
         return armature.display as ArmatureDisplay;
     }
 
-    public buildDragonBonesData(dragonBonesName: string, textureScale = 1.0): dragonBones.DragonBonesData {
-        let data = this._dragonBonesDataMap[dragonBonesName];
-        if (!data) {
-            const cache = this._scene.cache;
-            const boneRawData: any = cache.custom.dragonbone.get(dragonBonesName);
-            if (boneRawData) {
-                // parse raw data and add to cache map
-                data = this.parseDragonBonesData(boneRawData, dragonBonesName, textureScale);
-
-                const texture = this._scene.textures.get(dragonBonesName);
-                const json = cache.json.get(`${dragonBonesName}_atlasjson`);
-
-                this.parseTextureAtlasData(json, texture, texture.key, textureScale);
-            }
-        }
-        return data;
-    }
-
     protected _isSupportMesh(): boolean {
         console.warn('Mesh is not supported yet');
 
@@ -78,5 +60,23 @@ export class Factory extends dragonBones.BaseFactory {
         slot.init(slotData, armature, rawDisplay, meshDisplay);
 
         return slot;
+    }
+
+    private buildDragonBonesData(dragonBonesName: string, textureScale = 1.0): dragonBones.DragonBonesData {
+        let data = this._dragonBonesDataMap[dragonBonesName];
+        if (!data) {
+            const cache = this._scene.cache;
+            const boneRawData: any = cache.custom.dragonbone.get(dragonBonesName);
+            if (boneRawData) {
+                // parse raw data and add to cache map
+                data = this.parseDragonBonesData(boneRawData, dragonBonesName, textureScale);
+
+                const texture = this._scene.textures.get(dragonBonesName);
+                const json = cache.json.get(`${dragonBonesName}_atlasjson`);
+
+                this.parseTextureAtlasData(json, texture, texture.key, textureScale);
+            }
+        }
+        return data;
     }
 }
