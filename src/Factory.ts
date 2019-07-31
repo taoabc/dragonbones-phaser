@@ -18,11 +18,29 @@ export class Factory extends dragonBones.BaseFactory {
     public buildArmatureDisplay(armatureName: string, dragonBonesName: string, skinName: string = '', textureAtlasName: string = '', textureScale = 1.0): ArmatureDisplay {
         let armature: dragonBones.Armature;
 
-        if (this.buildDragonBonesData(dragonBonesName, textureScale)) {
+        if (this.buildDragonBoneData(dragonBonesName, textureScale)) {
             armature = this.buildArmature(armatureName, dragonBonesName, skinName, textureAtlasName);
         }
 
         return armature.display as ArmatureDisplay;
+    }
+
+    public buildDragonBoneData(dragonBonesName: string, textureScale = 1.0): dragonBones.DragonBonesData {
+        let data = this._dragonBonesDataMap[dragonBonesName];
+        if (!data) {
+            const cache = this._scene.cache;
+            const boneRawData: any = cache.custom.dragonbone.get(dragonBonesName);
+            if (boneRawData) {
+                // parse raw data and add to cache map
+                data = this.parseDragonBonesData(boneRawData, dragonBonesName, textureScale);
+
+                const texture = this._scene.textures.get(dragonBonesName);
+                const json = cache.json.get(`${dragonBonesName}_atlasjson`);
+
+                this.parseTextureAtlasData(json, texture, texture.key, textureScale);
+            }
+        }
+        return data;
     }
 
     protected _isSupportMesh(): boolean {
@@ -60,23 +78,5 @@ export class Factory extends dragonBones.BaseFactory {
         slot.init(slotData, armature, rawDisplay, meshDisplay);
 
         return slot;
-    }
-
-    private buildDragonBonesData(dragonBonesName: string, textureScale = 1.0): dragonBones.DragonBonesData {
-        let data = this._dragonBonesDataMap[dragonBonesName];
-        if (!data) {
-            const cache = this._scene.cache;
-            const boneRawData: any = cache.custom.dragonbone.get(dragonBonesName);
-            if (boneRawData) {
-                // parse raw data and add to cache map
-                data = this.parseDragonBonesData(boneRawData, dragonBonesName, textureScale);
-
-                const texture = this._scene.textures.get(dragonBonesName);
-                const json = cache.json.get(`${dragonBonesName}_atlasjson`);
-
-                this.parseTextureAtlasData(json, texture, texture.key, textureScale);
-            }
-        }
-        return data;
     }
 }
