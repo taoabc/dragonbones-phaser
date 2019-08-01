@@ -20,8 +20,9 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
 
         return this._factory;
     }
-    protected _dbInst: dragonBones.DragonBones;
-    protected _factory: Factory;
+
+    protected _dbInst?: dragonBones.DragonBones;
+    protected _factory?: Factory;
 
     constructor(scene: Phaser.Scene, pluginManager: Phaser.Plugins.PluginManager) {
         super(scene, pluginManager);
@@ -41,7 +42,7 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
          * Add dragonbone alone
          * add.dragonbone('dragonboneName');
          */
-        pluginManager.registerGameObject("dragonbone", CreateDragonBoneRegisterHandler);
+        pluginManager.registerGameObject('dragonbone', CreateDragonBoneRegisterHandler);
         /**
          * Add armature, this will add dragonBones when not exist
          * add.armature('armatureName', 'dragonbonesName');
@@ -57,7 +58,9 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
         const display = this.factory.buildArmatureDisplay(armature, dragonBones, skinName, atlasTextureName, textureScale);
         this.systems.displayList.add(display);
         // use db.clock instead, if here we just use this.systems.updateList.add(display), that will cause the db event is dispatched with 1 or more frames delay
-        this._dbInst.clock.add(display.armature);
+        if (this._dbInst) {
+            this._dbInst.clock.add(display.armature);
+        }
 
         return display;
     }
@@ -122,9 +125,9 @@ const DragonBoneFileRegisterHandler = function (dragonbonesName: string | object
     textureURL?: string,
     atlasURL?: string,
     boneURL?: string,
-    textureXhrSettings?: XHRSettingsObject,
-    atlasXhrSettings?: XHRSettingsObject,
-    boneXhrSettings?: XHRSettingsObject) {
+    textureXhrSettings?: Phaser.Types.Loader.XHRSettingsObject,
+    atlasXhrSettings?: Phaser.Types.Loader.XHRSettingsObject,
+    boneXhrSettings?: Phaser.Types.Loader.XHRSettingsObject) {
     const multifile = new DragonBonesFile(this, dragonbonesName, textureURL, atlasURL, boneURL, textureXhrSettings, atlasXhrSettings, boneXhrSettings);
     this.addFile(multifile.files);
 

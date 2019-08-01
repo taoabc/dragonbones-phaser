@@ -1,4 +1,6 @@
 export const Skew = {
+    _skewX: 0,
+    _skewY: 0,
     getSkewX(): number {
         return this._skewX || 0;
     },

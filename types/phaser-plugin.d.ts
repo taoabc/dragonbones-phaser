@@ -1,4 +1,7 @@
 // Extends phaser declaration
+import p from 'phaser';
+import { ArmatureDisplay } from '../src/display/ArmatureDisplay';
+import { DragonBonesData } from 'libdragonbones';
 
 declare namespace Phaser {
   namespace Loader {
@@ -7,17 +10,17 @@ declare namespace Phaser {
         textureURL?: string,
         atlasURL?: string,
         boneURL?: string,
-        textureXhrSettings?: XHRSettingsObject,
-        atlasXhrSettings?: XHRSettingsObject,
-        boneXhrSettings?: XHRSettingsObject) => Phaser.Loader.LoaderPlugin;
+        textureXhrSettings?: p.Types.Loader.XHRSettingsObject,
+        atlasXhrSettings?: p.Types.Loader.XHRSettingsObject,
+        boneXhrSettings?: p.Types.Loader.XHRSettingsObject) => Phaser.Loader.LoaderPlugin;
     }
   }
 
   namespace GameObjects {
     interface GameObjectFactory {
       armature: (armature: string, dragonBones?: string, skinName?: string, atlasTextureName?: string)
-        => dragonBones.phaser.display.ArmatureDisplay;
-      dragonBones: (dragonBonesName: string, textureScale?: number) => dragonBones.DragonBonesData;
+        => ArmatureDisplay;
+      dragonBones: (dragonBonesName: string, textureScale?: number) => DragonBonesData;
     }
   }
 }

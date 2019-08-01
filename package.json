@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "build-w": "tsc --watch",
+    "lint": "eslint src --ext .js,.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,6 +29,9 @@
     "phaser": "^3.18.1"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "eslint": "^6.1.0",
     "typescript": "^3.5.3"
   }
 }

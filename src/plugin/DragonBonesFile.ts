@@ -7,9 +7,9 @@ export class DragonBonesFile extends Phaser.Loader.MultiFile {
         textureURL?: string,
         atlasURL?: string,
         boneURL?: string,
-        textureXhrSettings?: XHRSettingsObject,
-        atlasXhrSettings?: XHRSettingsObject,
-        boneXhrSettings?: XHRSettingsObject) {
+        textureXhrSettings?: Phaser.Types.Loader.XHRSettingsObject,
+        atlasXhrSettings?: Phaser.Types.Loader.XHRSettingsObject,
+        boneXhrSettings?: Phaser.Types.Loader.XHRSettingsObject) {
         let image: Phaser.Loader.FileTypes.ImageFile;
         let data: Phaser.Loader.FileTypes.JSONFile;
         let boneData: Phaser.Loader.File;
