@@ -7,7 +7,7 @@ export class DisplayContainer extends Phaser.GameObjects.Container {
   private _skewY = 0;
   private tempTransformMatrix: TransformMatrix;
 
-  constructor(scene: Phaser.Scene, x?: number, y?: number, children?: Phaser.GameObjects.GameObject[]) {
+  public constructor(scene: Phaser.Scene, x?: number, y?: number, children?: Phaser.GameObjects.GameObject[]) {
     super(scene, x, y, children);
     this.tempTransformMatrix = new TransformMatrix();
   }
@@ -34,19 +34,19 @@ export class DisplayContainer extends Phaser.GameObjects.Container {
     return output;
   }
 
-  get skewX(): number {
+  public get skewX(): number {
     return this._skewX;
   }
 
-  set skewX(v: number) {
+  public set skewX(v: number) {
     this._skewX = v;
   }
 
-  get skewY(): number {
+  public get skewY(): number {
     return this._skewY;
   }
 
-  set skewY(v: number) {
+  public set skewY(v: number) {
     this._skewY = v;
   }
 

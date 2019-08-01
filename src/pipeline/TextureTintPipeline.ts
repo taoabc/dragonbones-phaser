@@ -13,7 +13,10 @@ export class TextureTintPipeline extends Phaser.Renderer.WebGL.Pipelines.Texture
     this._tempMatrix3 = new TransformMatrix();
   }
 
-  public batchSprite(sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite, camera: Phaser.Cameras.Scene2D.Camera, parentTransformMatrix: Phaser.GameObjects.Components.TransformMatrix): void {
+  public batchSprite(
+    sprite: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
+    camera: Phaser.Cameras.Scene2D.Camera,
+    parentTransformMatrix: Phaser.GameObjects.Components.TransformMatrix): void {
     this.renderer.setPipeline(this);
 
     const camMatrix = this._tempMatrix1;

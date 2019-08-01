@@ -6,7 +6,7 @@ export class ArmatureDisplay extends DisplayContainer implements dragonBones.IAr
   public debugDraw = false;
   private _armature: dragonBones.Armature;
 
-  constructor(scene: Phaser.Scene) {
+  public constructor(scene: Phaser.Scene) {
     super(scene);
   }
 
@@ -24,8 +24,8 @@ export class ArmatureDisplay extends DisplayContainer implements dragonBones.IAr
 
   public dbUpdate(): void {
     // TODO: draw debug graphics
-    if (this.debugDraw) {
-    }
+    // if (this.debugDraw) {
+    // }
   }
 
   public dispose(disposeProxy: boolean): void {
@@ -55,11 +55,11 @@ export class ArmatureDisplay extends DisplayContainer implements dragonBones.IAr
     this.off(type, listener, scope);
   }
 
-  get armature(): dragonBones.Armature {
+  public get armature(): dragonBones.Armature {
     return this._armature;
   }
 
-  get animation(): Animation {
+  public get animation(): Animation {
     return this._armature.animation;
   }
 }

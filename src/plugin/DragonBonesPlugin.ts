@@ -10,9 +10,40 @@ import { SlotSprite } from '../display/SlotSprite';
 import { ArmatureDisplay } from '../display/ArmatureDisplay';
 import { DragonBonesFile } from './DragonBonesFile';
 
+const CreateArmatureRegisterHandler = function (
+  this: Phaser.Loader.LoaderPlugin,
+  armature: string,
+  dragonBones?: string,
+  skinName?: string,
+  atlasTextureName?: string): ArmatureDisplay {
+  return this.scene.dragonbone.createArmature(armature, dragonBones, skinName, atlasTextureName);
+};
+
+const CreateDragonBoneRegisterHandler = function(
+  this: Phaser.Loader.LoaderPlugin,
+  dragonBonesName: string,
+  textureScale = 1.0): dragonBones.DragonBonesData {
+  return this.scene.dragonbone.createDragonBones(dragonBonesName, textureScale);
+};
+
+const DragonBoneFileRegisterHandler = function (
+  this: Phaser.Loader.LoaderPlugin,
+  dragonbonesName: string | object,
+  textureURL?: string,
+  atlasURL?: string,
+  boneURL?: string,
+  textureXhrSettings?: Phaser.Types.Loader.XHRSettingsObject,
+  atlasXhrSettings?: Phaser.Types.Loader.XHRSettingsObject,
+  boneXhrSettings?: Phaser.Types.Loader.XHRSettingsObject): Phaser.Loader.LoaderPlugin {
+  const multifile = new DragonBonesFile(this, dragonbonesName, textureURL, atlasURL, boneURL, textureXhrSettings, atlasXhrSettings, boneXhrSettings);
+  this.addFile(multifile.files);
+
+  return this;
+};
+
 export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
 
-  get factory(): Factory {  // lazy instancing
+  public get factory(): Factory {  // lazy instancing
     if (!this._factory) {
       this._dbInst = new dragonBones.DragonBones(new EventDispatcher());
       this._factory = new Factory(this._dbInst, this.scene);
@@ -24,7 +55,7 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
   protected _dbInst: dragonBones.DragonBones | null = null;
   protected _factory: Factory | null = null;
 
-  constructor(scene: Phaser.Scene, pluginManager: Phaser.Plugins.PluginManager) {
+  public constructor(scene: Phaser.Scene, pluginManager: Phaser.Plugins.PluginManager) {
     super(scene, pluginManager);
 
     const game = this.game;
@@ -100,7 +131,7 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
     this.shutdown();
 
     this._factory =
-            this._dbInst = undefined;
+            this._dbInst = null;
 
     this.pluginManager =
             this.game =
@@ -112,34 +143,3 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
     this._dbInst && this._dbInst.advanceTime(delta * 0.001);
   }
 }
-
-const CreateArmatureRegisterHandler = function (
-  this: Phaser.Loader.LoaderPlugin,
-  armature: string,
-  dragonBones?: string,
-  skinName?: string,
-  atlasTextureName?: string): ArmatureDisplay {
-  return this.scene.dragonbone.createArmature(armature, dragonBones, skinName, atlasTextureName);
-};
-
-const CreateDragonBoneRegisterHandler = function(
-  this: Phaser.Loader.LoaderPlugin,
-  dragonBonesName: string,
-  textureScale = 1.0): dragonBones.DragonBonesData {
-  return this.scene.dragonbone.createDragonBones(dragonBonesName, textureScale);
-};
-
-const DragonBoneFileRegisterHandler = function (
-  this: Phaser.Loader.LoaderPlugin,
-  dragonbonesName: string | object,
-  textureURL?: string,
-  atlasURL?: string,
-  boneURL?: string,
-  textureXhrSettings?: Phaser.Types.Loader.XHRSettingsObject,
-  atlasXhrSettings?: Phaser.Types.Loader.XHRSettingsObject,
-  boneXhrSettings?: Phaser.Types.Loader.XHRSettingsObject) {
-  const multifile = new DragonBonesFile(this, dragonbonesName, textureURL, atlasURL, boneURL, textureXhrSettings, atlasXhrSettings, boneXhrSettings);
-  this.addFile(multifile.files);
-
-  return this;
-};
