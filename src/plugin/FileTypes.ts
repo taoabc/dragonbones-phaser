@@ -4,7 +4,7 @@ type FileTypeClass = new (...args: any[]) => Phaser.Loader.File;
 
 interface Map {
     [key: string]: any;
-};
+}
 
 export const FileTypes = {
     IMAGE: "imageFile",

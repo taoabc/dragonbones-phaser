@@ -3,7 +3,7 @@ import * as dragonBones from 'libdragonbones';
 
 import { TextureAtlasData } from './display/TextureAtlasData';
 import { ArmatureDisplay } from './display/ArmatureDisplay';
-import { Slot } from './display/Slot';
+import { Slot } from "./display/Slot";
 export class Factory extends dragonBones.BaseFactory {
     protected _scene: Phaser.Scene;
     protected _dragonBones: dragonBones.DragonBones;
