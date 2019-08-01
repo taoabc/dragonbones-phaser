@@ -4,13 +4,13 @@ export const Skew = {
   getSkewX(): number {
     return this._skewX || 0;
   },
-  setSkewX(v: number) {
+  setSkewX(v: number): void {
     this._skewX = v;
   },
   getSkewY(): number {
     return this._skewY || 0;
   },
-  setSkewY(v: number) {
+  setSkewY(v: number): void {
     this._skewY = v;
   },
   setSkew(sx: number, sy?: number): void {

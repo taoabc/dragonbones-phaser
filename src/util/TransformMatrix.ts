@@ -13,7 +13,7 @@ interface DecomposedMatrix {
 export class TransformMatrix extends Phaser.GameObjects.Components.TransformMatrix {
   private tempDecomposedMatrix = this.decomposedMatrix as DecomposedMatrix;
 
-  constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number) {
+  public constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number) {
     super(a, b, c, d, tx, ty);
     this.tempDecomposedMatrix.skewX = 0;
     this.tempDecomposedMatrix.skewY = 0;
@@ -67,11 +67,11 @@ export class TransformMatrix extends Phaser.GameObjects.Components.TransformMatr
     return this;
   }
 
-  get skewX(): number {
+  public get skewX(): number {
     return -Math.atan2(-this.c, this.d);
   }
 
-  get skewY(): number {
+  public get skewY(): number {
     return Math.atan2(this.b, this.a);
   }
 }
