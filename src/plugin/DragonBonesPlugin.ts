@@ -96,7 +96,7 @@ export class DragonBonesScenePlugin extends Phaser.Plugins.ScenePlugin {
     return display;
   }
 
-  public createDragonBones(dragonBonesName: string, textureScale = 1.0): DragonBonesData {
+  public createDragonBones(dragonBonesName: string, textureScale = 1.0): dragonBones.DragonBonesData {
     return this.factory.buildDragonBoneData(dragonBonesName, textureScale);
   }
 
