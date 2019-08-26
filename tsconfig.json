@@ -8,7 +8,6 @@
     "importHelpers": false,
     "sourceMap": false,
     "stripInternal": true,
-    "alwaysStrict": true,
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
