@@ -84,8 +84,7 @@ export class DragonBonesFile extends Phaser.Loader.MultiFile {
 
       json.addToCache();
       bone.addToCache();
-      this.loader.textureManager.addImage(image.key, image.data);
-      image.pendingDestroy(); // call pendingDestroy manually
+      image.addToCache();
 
       this.complete = true;
     }
